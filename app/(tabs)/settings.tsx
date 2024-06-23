@@ -1,10 +1,12 @@
-import { Text, View, StyleSheet } from "react-native";
+import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
+import { StyleSheet } from "react-native";
 
 export default function SettingsScreen() {
     return (
-        <View style={styles.container}>
-            <Text>Settings</Text>
-        </View>
+        <ThemedView style={styles.container}>
+            <ThemedText>Settings</ThemedText>
+        </ThemedView>
     )
 }
 

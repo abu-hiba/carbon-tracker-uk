@@ -1,12 +1,23 @@
+import { ThemedText } from '@/components/ThemedText';
+import { ThemedView } from '@/components/ThemedView';
 import { Link } from 'expo-router';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export default function HomeScreen() {
     return (
-        <View style={styles.container}>
-            <Text>Home</Text>
-            <Link href="details">View details</Link>
-        </View>
+        <ThemedView style={styles.container}>
+            <ThemedText>Home</ThemedText>
+            {[1000, 1001, 1002, 1003, 1004, 1005].map(id => (
+                <Link
+                    href={{
+                        pathname: "/details/[id]",
+                        params: { id }
+                    }}
+                    key={id}>
+                    <ThemedText>ThemedView user {id} details</ThemedText>
+                </Link>
+            ))}
+        </ThemedView>
     );
 }
 
