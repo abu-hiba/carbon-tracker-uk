@@ -1,21 +1,9 @@
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { carbonIntensityAPI } from '@/services/carbonIntensityAPI';
+import { CarbonIntensityData, carbonIntensityAPI } from '@/services/carbonIntensityAPI';
 //import { Link } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
-
-type CarbonIntensityData = {
-    data: {
-        from: string;
-        to: string;
-        intensity: {
-            forecast: number;
-            actual: number | null;
-            index: string;
-        };
-    }[];
-};
 
 export default function HomeScreen() {
     const [carbonIntensityData, setCarbonIntensityData] = useState<CarbonIntensityData>();
