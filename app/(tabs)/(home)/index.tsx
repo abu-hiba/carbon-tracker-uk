@@ -1,5 +1,6 @@
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { carbonIntensityAPI } from '@/services/carbonIntensityAPI';
 //import { Link } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
@@ -21,23 +22,17 @@ export default function HomeScreen() {
     const [error, setError] = useState<Error>();
     const [loading, setLoading] = useState(true);
 
-    const getCarbonIntensity = async () => {
-        try {
-            const response = await fetch('https://api.carbonintensity.org.uk/intensity');
-            const data = await response.json();
-            setCarbonIntensityData(data);
-        } catch (error: any) {
-            console.error('Error fetching data: ', error);
-            if (error instanceof Error) setError(error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
     useEffect(() => {
-        (async () => {
-            await getCarbonIntensity();
-        })();
+      const getCarbonIntensity = async () => {
+        const { data, error } = await carbonIntensityAPI.get('/intensity');
+        if (error) {
+          setError(error);
+        } else {
+          setCarbonIntensityData(data);
+        }
+        setLoading(false);
+      };
+      getCarbonIntensity();
     }, []);
 
     const displayIntensity = (intensity: number | null): string => {
