@@ -1,8 +1,8 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import { AppThemeContext } from "@/theme/AppThemeContext";
 import { useContext } from "react";
 import { Pressable, StyleSheet } from "react-native";
-import { AppThemeContext } from "../_layout";
 
 export default function SettingsScreen() {
     const { setAppTheme } = useContext(AppThemeContext)
@@ -17,6 +17,10 @@ export default function SettingsScreen() {
 
             <Pressable style={styles.themeButton} onPress={() => { console.log('dark'); setAppTheme('dark') }}>
               <ThemedText>Dark Theme</ThemedText>
+            </Pressable>
+
+            <Pressable style={styles.themeButton} onPress={() => { console.log('system'); setAppTheme('system') }}>
+              <ThemedText>System Theme</ThemedText>
             </Pressable>
         </ThemedView>
     )
