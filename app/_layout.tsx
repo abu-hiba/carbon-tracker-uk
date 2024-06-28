@@ -15,7 +15,7 @@ function App() {
         <Drawer.Screen
             name="(tabs)"
             options={{
-              drawerLabel: 'Home',
+              drawerLabel: 'Home', // TODO: how to hide this from the drawer?
               title: '',
             }}
         />
