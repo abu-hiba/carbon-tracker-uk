@@ -5,10 +5,10 @@ import { AppThemeContext } from '@/theme/AppThemeContext';
 import { AppThemeProvider } from '@/theme/AppThemeProvider';
 
 function App() {
-  const { theme: appTheme } = React.useContext(AppThemeContext);
+  const { theme } = React.useContext(AppThemeContext);
 
   return (
-    <ThemeProvider value={appTheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={theme.mode === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>

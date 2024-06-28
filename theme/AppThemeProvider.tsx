@@ -1,10 +1,10 @@
 import React from "react";
-import { AppThemeContext, Theme, ThemeOptions } from "./AppThemeContext";
+import { AppThemeContext, Theme, ThemeMode, ThemeOptions } from "./AppThemeContext";
 import { useColorScheme } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function AppThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = React.useState<Theme>('light');
+  const [theme, setTheme] = React.useState<Theme>({ mode: 'light', isSystem: false });
   const systemTheme = useColorScheme();
 
   React.useEffect(() => {
@@ -12,23 +12,23 @@ export function AppThemeProvider({ children }: { children: React.ReactNode }) {
       try {
         const savedTheme = await AsyncStorage.getItem('theme');
         if (savedTheme === 'system' || !savedTheme) {
-          setTheme(systemTheme === 'dark' ? 'dark' : 'light');
+          setTheme({ mode: systemTheme === 'dark' ? 'dark' : 'light', isSystem: true });
         } else {
-          setTheme(savedTheme as Theme);
+          setTheme({ mode: savedTheme as ThemeMode, isSystem: false });
         }
       } catch (error) {
         console.error(error);
       }
     };
     getTheme();
-  }, [theme, systemTheme]);
+  }, [theme.mode, systemTheme]);
 
   const setAppTheme = (newTheme: ThemeOptions) => {
     try {
       if (newTheme === 'system') {
-        setTheme(systemTheme === 'dark' ? 'dark' : 'light');
+        setTheme({ mode: systemTheme === 'dark' ? 'dark' : 'light', isSystem: true });
       } else {
-        setTheme(newTheme);
+        setTheme({ mode: newTheme, isSystem: false });
       }
       AsyncStorage.setItem('theme', newTheme);
     } catch (error) {

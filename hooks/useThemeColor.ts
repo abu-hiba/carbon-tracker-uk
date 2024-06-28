@@ -12,11 +12,11 @@ export function useThemeColor(
   colorName: keyof typeof Colors.light & keyof typeof Colors.dark
 ) {
   const { theme } = React.useContext(AppThemeContext);
-  const colorFromProps = props[theme];
+  const colorFromProps = props[theme.mode];
 
   if (colorFromProps) {
     return colorFromProps;
   } else {
-    return Colors[theme][colorName];
+    return Colors[theme.mode][colorName];
   }
 }
