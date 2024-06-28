@@ -1,16 +1,26 @@
+import React from 'react';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
-import { useColorScheme } from 'react-native';
+import { AppThemeContext } from '@/theme/AppThemeContext';
+import { AppThemeProvider } from '@/theme/AppThemeProvider';
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
+function App() {
+  const { theme } = React.useContext(AppThemeContext);
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={theme.mode === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
     </ThemeProvider>
+  );
+};
+
+export default function RootLayout() {
+  return (
+    <AppThemeProvider>
+      <App />
+    </AppThemeProvider>
   );
 }
 
