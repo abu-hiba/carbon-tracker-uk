@@ -1,6 +1,5 @@
 import React from 'react';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
 import { AppThemeContext } from '@/theme/AppThemeContext';
 import { AppThemeProvider } from '@/theme/AppThemeProvider';
@@ -14,7 +13,7 @@ function App() {
       <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer>
         <Drawer.Screen
-            name="index"
+            name="(tabs)"
             options={{
               drawerLabel: 'Home',
               title: '',
