@@ -1,14 +1,13 @@
 import React from "react";
 import { ThemedView } from "@/components/ThemedView";
-import { AppThemeContext, type ThemeOptions } from "@/theme/AppThemeContext";
+import { AppThemeContext, ThemeOptions } from "@/theme/AppThemeContext";
 import { FlatList, ListRenderItemInfo, StyleSheet } from "react-native";
 import { ThemeItem } from "./ThemeItem";
 
-// TODO: use theme type enum
 const options = [
-  { theme: 'light', description: 'Always use light theme', title: 'Light' },
-  { theme: 'dark', description: 'Always use dark theme', title: 'Dark' },
-  { theme: 'system', description: 'Use device settings', title: 'System' },
+  { theme: ThemeOptions.Light, description: 'Always use light theme', title: 'Light' },
+  { theme: ThemeOptions.Dark, description: 'Always use dark theme', title: 'Dark' },
+  { theme: ThemeOptions.System, description: 'Use device settings', title: 'System' },
 ];
 
 export function ThemeScreen() {
@@ -17,7 +16,7 @@ export function ThemeScreen() {
 
   React.useEffect(() => {
     if (theme.isSystem) {
-      setActiveTheme('system');
+      setActiveTheme(ThemeOptions.System);
     } else {
       setActiveTheme(theme.mode);
     }
