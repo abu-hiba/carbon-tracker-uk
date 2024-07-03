@@ -26,7 +26,7 @@ function App() {
         <Drawer.Screen
             name="(tabs)"
             options={{
-              drawerLabel: () => <Ionicons name="close" color={textColor} size={22} />, // TODO: how to hide this from the drawer?
+              drawerLabel: () => <Ionicons name="close" color={textColor} size={22} />,
               drawerActiveBackgroundColor: backgroundColor,
               title: '',
             }}
