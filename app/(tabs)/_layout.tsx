@@ -7,7 +7,7 @@ export default function TabLayout() {
 
   return (
     <Tabs screenOptions={{ headerShown: false, tabBarShowLabel: false, tabBarActiveTintColor }}>
-      <Tabs.Screen name="(home)" options={{ tabBarIcon: TabBarIcon('home-sharp') }} />
+      <Tabs.Screen name="index" options={{ tabBarIcon: TabBarIcon('home-sharp') }} />
       <Tabs.Screen name="region" options={{ tabBarIcon: TabBarIcon('map') }} />
     </Tabs>
   );
