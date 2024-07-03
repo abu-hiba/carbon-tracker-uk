@@ -2,6 +2,7 @@ import React from "react";
 import { AppThemeContext, Theme, ThemeMode, ThemeOptions } from "./AppThemeContext";
 import { useColorScheme } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
 
 export function AppThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = React.useState<Theme>({ mode: ThemeOptions.Light, isSystem: false });
@@ -44,7 +45,9 @@ export function AppThemeProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <AppThemeContext.Provider value={{ theme, setAppTheme }}>
-      {children}
+      <ThemeProvider value={theme.mode === ThemeOptions.Dark ? DarkTheme : DefaultTheme}>
+        {children}
+      </ThemeProvider>
     </AppThemeContext.Provider>
   
   );
