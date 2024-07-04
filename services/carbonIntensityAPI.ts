@@ -1,6 +1,6 @@
 const BASE_URL = 'https://api.carbonintensity.org.uk';
 
-export type CarbonIntensityData = {
+export type CarbonIntensityResponse = {
     data: {
         from: string;
         to: string;
@@ -13,7 +13,7 @@ export type CarbonIntensityData = {
 };
 
 export const carbonIntensityAPI = {
-  get: async (path: string): Promise<{ data?: CarbonIntensityData, error?: Error }> => {
+  get: async (path: string): Promise<{ data?: CarbonIntensityResponse, error?: Error }> => {
     try {
       const response = await fetch(`${BASE_URL}${path}`);
       const data = await response.json();
