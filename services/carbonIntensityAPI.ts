@@ -1,5 +1,6 @@
 const BASE_URL = 'https://api.carbonintensity.org.uk';
 
+export type CarbonIntensityIndex = 'very low' | 'low' | 'moderate' | 'high' | 'very high';
 export type CarbonIntensityResponse = {
     data: {
         from: string;
@@ -7,7 +8,7 @@ export type CarbonIntensityResponse = {
         intensity: {
             forecast: number;
             actual: number | null;
-            index: string;
+            index: CarbonIntensityIndex;
         };
     }[];
 };

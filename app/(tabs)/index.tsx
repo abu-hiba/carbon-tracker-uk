@@ -26,16 +26,29 @@ function CurrentCarbonIntensity({ carbonIntensityData }: CurrentCarbonIntensityP
     height: screenWidth * 0.5
   };
 
-  const index = carbonIntensityData.intensity.index;
+  let index = carbonIntensityData.intensity.index;
+  const mapIndexToColor = {
+    'very low': 'palegreen',
+    'low': 'lightgreen',
+    'moderate': 'orange',
+    'high': 'orange',
+    'very high': 'red',
+  };
+
+  index = 'very low'
+
+  const displayIndex = index.split(' ').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
   return (
-    <ThemedView style={[styles.carbonIntensity, circleStyle]}>
+    <ThemedView style={[styles.carbonIntensity, circleStyle, { shadowColor: mapIndexToColor[index] }]}>
       <ThemedText style={styles.mainValue}>
         {carbonIntensityData.intensity.actual || carbonIntensityData.intensity.forecast}
       </ThemedText>
       <ThemedText style={styles.units}> gCO2/kWh</ThemedText>
-      {/*<ThemedText>Forecast: {formatIntensity(carbonIntensityData.intensity.forecast)}</ThemedText>*/}
-      <ThemedText style={styles.index}>{index.charAt(0).toUpperCase() + index.slice(1)}</ThemedText>
+      {/*<ThemedText>Forecast: {formatIntensity(carbonIntensityData.intensity.forecast)}</ThemedText>
+      TODO: indicate if value is forecast
+      */}
+      <ThemedText style={[styles.index, { color: mapIndexToColor[index] }]}>{displayIndex}</ThemedText>
     </ThemedView>
 
   );
@@ -102,7 +115,7 @@ const styles = StyleSheet.create({
     flexGrow: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: 'lightgreen', // TODO: add colors to theme
+    //shadowColor: 'lightgreen',
     shadowRadius: 10,
     marginTop: 70,
     shadowOpacity: 1,
@@ -120,6 +133,6 @@ const styles = StyleSheet.create({
   index: {
     fontSize: 20,
     marginTop: 10,
-    color: 'lightgreen', // TODO: add colors to theme
+    //color: 'lightgreen', // TODO: add colors to theme
   }
 });
